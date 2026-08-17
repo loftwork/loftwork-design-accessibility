@@ -35,7 +35,7 @@ npm run check:all
 
 - 公開する原稿は`src/content/docs/`へ追加します。
 - Practice一覧とフェーズ別一覧はfrontmatterから自動生成されます。
-- WCAGの名称とLevelは`src/data/wcag.ts`で一元管理します。
+- WCAGの日本語名、Level、WAIC日本語訳への参照先は`src/data/wcag.ts`で一元管理します。
 - Practice本文へメタデータ表示を重複して書く必要はありません。
 
 ## GitHub Pagesのパス
@@ -45,7 +45,13 @@ GitHub Actions上では、標準で以下を使用する構成です。
 - `site`: `https://loftwork.github.io`
 - `base`: `/loftwork-design-accessibility`
 
-カスタムドメインへ移行するときは、ビルド環境の`SITE_URL`と`BASE_PATH`で変更できます。GitHub PagesのワークフローはGO 3で追加します。
+`main`ブランチへpushすると、GitHub Actionsが検証・ビルドを行い、次のURLへ自動公開します。
+
+- `https://loftwork.github.io/loftwork-design-accessibility/`
+
+GitHubのリポジトリ設定では、`Settings` → `Pages` → `Build and deployment` → `Source`を`GitHub Actions`にします。手動で再公開するときは、Actionsの`Deploy to GitHub Pages`を実行します。
+
+カスタムドメインへ移行するときは、ビルド環境の`SITE_URL`と`BASE_PATH`で変更できます。
 
 ## コンテンツモデル
 

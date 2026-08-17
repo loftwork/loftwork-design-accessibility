@@ -12,8 +12,15 @@ const criteria = ids.map(getWcagCriterion);
 <ul class="wcag-refs" aria-label="関連するWCAG 2.2達成基準">
 	{criteria.map((criterion) => (
 		<li>
-			<span class="criterion-id">{criterion.id}</span>
-			<span>{criterion.title}</span>
+			<a
+				href={criterion.understandingUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label={`${criterion.id} ${criterion.titleJa}の解説書（新しいタブで開く）`}
+			>
+				<span class="criterion-id">{criterion.id}</span>
+				<span>{criterion.titleJa}</span>
+			</a>
 			<span class="level">Level {criterion.level}</span>
 		</li>
 	))}
@@ -30,6 +37,13 @@ const criteria = ids.map(getWcagCriterion);
 
 	.wcag-refs li {
 		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.6rem;
+		align-items: baseline;
+	}
+
+	.wcag-refs a {
+		display: inline-flex;
 		flex-wrap: wrap;
 		gap: 0.35rem 0.6rem;
 		align-items: baseline;

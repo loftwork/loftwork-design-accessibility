@@ -32,7 +32,7 @@ wcag:
 
 - `priority`はLoftworkとしての品質判断であり、WCAG Levelから導出しない。
 - `condition`は適用条件であり、`priority`とは別に管理する。
-- WCAGの名称とLevelはfrontmatterへ書かず、`src/data/wcag.ts`から取得する。
+- WCAGの名称、Level、WAIC日本語訳への参照先はfrontmatterへ書かず、`src/data/wcag.ts`から取得する。
 - Lensの正式な参照情報は`src/data/lenses.ts`で管理する。
 
 ## 生成される表示

@@ -93,7 +93,19 @@ const phaseOrder = Object.keys(phaseLabels) as Phase[];
 								<ul class="wcag-tags">
 									{practice.data.wcag.map((id) => {
 										const criterion = getWcagCriterion(id);
-										return <li><span>{id}</span><span class="level">Level {criterion.level}</span></li>;
+										return (
+											<li>
+												<a
+													href={criterion.understandingUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													aria-label={`${id} ${criterion.titleJa}の解説書（新しいタブで開く）`}
+												>
+													{id} {criterion.titleJa}
+												</a>
+												<span class="level">Level {criterion.level}</span>
+											</li>
+										);
 									})}
 								</ul>
 							</dd>
@@ -189,6 +201,10 @@ const phaseOrder = Object.keys(phaseLabels) as Phase[];
 		display: inline-flex;
 		gap: 0.35rem;
 		align-items: baseline;
+	}
+
+	.wcag-tags a {
+		color: inherit;
 	}
 
 	.wcag-tags .level {

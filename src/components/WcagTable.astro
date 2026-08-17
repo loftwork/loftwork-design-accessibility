@@ -23,6 +23,7 @@ const hasDescriptions = rows.some((row) => row.description);
 				<th scope="col">WCAG</th>
 				<th scope="col">達成基準</th>
 				<th scope="col">Level</th>
+				<th scope="col">参照</th>
 				{hasDescriptions && <th scope="col">このガイドで扱うこと</th>}
 			</tr>
 		</thead>
@@ -30,8 +31,22 @@ const hasDescriptions = rows.some((row) => row.description);
 			{rows.map((row) => (
 				<tr>
 					<th scope="row">{row.id}</th>
-					<td>{row.title}</td>
+					<td>{row.titleJa}</td>
 					<td><span class="level">{row.level}</span></td>
+					<td>
+						<ul class="reference-links">
+							<li>
+								<a href={row.understandingUrl} target="_blank" rel="noopener noreferrer">
+									解説書<span class="visually-hidden">（新しいタブで開く）</span>
+								</a>
+							</li>
+							<li>
+								<a href={row.translationUrl} target="_blank" rel="noopener noreferrer">
+									基準本文<span class="visually-hidden">（新しいタブで開く）</span>
+								</a>
+							</li>
+						</ul>
+					</td>
 					{hasDescriptions && <td>{row.description ?? '—'}</td>}
 				</tr>
 			))}
@@ -84,4 +99,14 @@ const hasDescriptions = rows.some((row) => row.description);
 		font-weight: 700;
 		text-align: center;
 	}
+
+	.reference-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.75rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
 </style>
