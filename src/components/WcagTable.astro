@@ -1,0 +1,87 @@
+---
+import { getWcagCriterion, type WcagId } from '../data/wcag';
+
+interface Item {
+	id: WcagId;
+	description?: string;
+}
+
+interface Props {
+	items: readonly Item[];
+	label?: string;
+}
+
+const { items, label = '関連するWCAG 2.2達成基準' } = Astro.props;
+const rows = items.map((item) => ({ ...getWcagCriterion(item.id), description: item.description }));
+const hasDescriptions = rows.some((row) => row.description);
+---
+
+<div class="table-wrap not-content" role="region" aria-label={label} tabindex="0">
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">WCAG</th>
+				<th scope="col">達成基準</th>
+				<th scope="col">Level</th>
+				{hasDescriptions && <th scope="col">このガイドで扱うこと</th>}
+			</tr>
+		</thead>
+		<tbody>
+			{rows.map((row) => (
+				<tr>
+					<th scope="row">{row.id}</th>
+					<td>{row.title}</td>
+					<td><span class="level">{row.level}</span></td>
+					{hasDescriptions && <td>{row.description ?? '—'}</td>}
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>
+
+<style>
+	.table-wrap {
+		overflow-x: auto;
+		margin-block: 1.25rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+	}
+
+	.table-wrap:focus-visible {
+		outline: 3px solid var(--sl-color-accent-high);
+		outline-offset: 3px;
+	}
+
+	table {
+		width: 100%;
+		min-width: 38rem;
+		border-collapse: collapse;
+		font-size: var(--sl-text-sm);
+	}
+
+	th,
+	td {
+		padding: 0.65rem 0.8rem;
+		border-bottom: 1px solid var(--sl-color-gray-5);
+		text-align: left;
+		vertical-align: top;
+	}
+
+	thead th {
+		background: var(--sl-color-gray-6);
+	}
+
+	tbody tr:last-child > * {
+		border-bottom: 0;
+	}
+
+	.level {
+		display: inline-block;
+		min-width: 2.6em;
+		padding: 0.05rem 0.4rem;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		font-weight: 700;
+		text-align: center;
+	}
+</style>

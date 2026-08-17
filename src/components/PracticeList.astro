@@ -1,0 +1,198 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { conditionLabels, phaseLabels, phaseStrengthLabels, priorityLabels, type Phase } from '../data/content-labels';
+import type { LensId } from '../data/lenses';
+import { getWcagCriterion } from '../data/wcag';
+import type { PhaseStrength, PracticeFields } from '../schemas/content';
+
+type DocsEntry = CollectionEntry<'docs'>;
+type PracticeEntry = DocsEntry & { data: DocsEntry['data'] & PracticeFields };
+interface Props {
+	primaryLens?: LensId;
+	phase?: Phase;
+}
+
+const { primaryLens, phase } = Astro.props;
+
+function isPracticeEntry(entry: DocsEntry): entry is PracticeEntry {
+	return entry.data.contentType === 'practice';
+}
+
+const practices = (await getCollection('docs'))
+	.filter(isPracticeEntry)
+	.filter((entry) => !primaryLens || entry.data.primaryLens === primaryLens)
+	.filter((entry) => !phase || entry.data.phases[phase])
+	.sort((a, b) => {
+		if (phase) {
+			const phaseOrder: Record<PhaseStrength, number> = { primary: 0, supporting: 1 };
+			const strengthDifference = phaseOrder[a.data.phases[phase]!] - phaseOrder[b.data.phases[phase]!];
+			if (strengthDifference !== 0) return strengthDifference;
+		}
+
+		return a.data.practiceId.localeCompare(b.data.practiceId, 'en');
+	});
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+	? import.meta.env.BASE_URL
+	: `${import.meta.env.BASE_URL}/`;
+const phaseOrder = Object.keys(phaseLabels) as Phase[];
+---
+
+<ol class="practice-list">
+	{practices.map((practice) => {
+		const primaryPhases = phaseOrder.filter((key) => practice.data.phases[key] === 'primary');
+		const supportingPhases = phaseOrder.filter((key) => practice.data.phases[key] === 'supporting');
+
+		return (
+			<li>
+				<article>
+					<p class="practice-id">{practice.data.practiceId}</p>
+					<h3><a href={`${baseUrl}${practice.id}/`}>{practice.data.title}</a></h3>
+					<p>{practice.data.description}</p>
+					<dl class="metadata" aria-label={`${practice.data.practiceId}のメタデータ`}>
+						{phase ? (
+							<div>
+								<dt>このフェーズでの位置づけ</dt>
+								<dd>{phaseStrengthLabels[practice.data.phases[phase]!]}</dd>
+							</div>
+						) : (
+							<>
+								<div class="wide">
+									<dt>主に扱うフェーズ</dt>
+									<dd>
+										<ul class="tags">
+											{primaryPhases.map((key) => <li>{phaseLabels[key]}</li>)}
+										</ul>
+									</dd>
+								</div>
+								{supportingPhases.length > 0 && (
+									<div class="wide">
+										<dt>補助的に扱うフェーズ</dt>
+										<dd>
+											<ul class="tags supporting">
+												{supportingPhases.map((key) => <li>{phaseLabels[key]}</li>)}
+											</ul>
+										</dd>
+									</div>
+								)}
+							</>
+						)}
+						<div>
+							<dt>優先度</dt>
+							<dd>{priorityLabels[practice.data.priority]}</dd>
+						</div>
+						{practice.data.condition === 'conditional' && (
+							<div>
+								<dt>適用条件</dt>
+								<dd>{conditionLabels.conditional}</dd>
+							</div>
+						)}
+						<div class="wide">
+							<dt>関連するWCAG 2.2</dt>
+							<dd>
+								<ul class="wcag-tags">
+									{practice.data.wcag.map((id) => {
+										const criterion = getWcagCriterion(id);
+										return <li><span>{id}</span><span class="level">Level {criterion.level}</span></li>;
+									})}
+								</ul>
+							</dd>
+						</div>
+					</dl>
+				</article>
+			</li>
+		);
+	})}
+</ol>
+
+<style>
+	.practice-list {
+		display: grid;
+		gap: 1rem;
+		margin: 1.5rem 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.practice-list article {
+		padding: clamp(1rem, 2vw, 1.35rem);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+	}
+
+	.practice-list h3 {
+		margin-block: 0.2rem 0.5rem;
+	}
+
+	.practice-id {
+		margin: 0;
+		font-size: var(--sl-text-sm);
+		font-weight: 700;
+		letter-spacing: 0.04em;
+	}
+
+	.metadata {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		gap: 0.75rem 1.25rem;
+		margin-block: 1rem 0;
+		padding-block-start: 0.9rem;
+		border-block-start: 1px solid var(--sl-color-gray-5);
+		color: var(--sl-color-gray-2);
+		font-size: var(--sl-text-sm);
+	}
+
+	.metadata > div {
+		min-width: 0;
+	}
+
+	.metadata .wide {
+		grid-column: 1 / -1;
+	}
+
+	.metadata dt {
+		margin-block-end: 0.3rem;
+		font-size: var(--sl-text-xs);
+		font-weight: 700;
+		letter-spacing: 0.02em;
+	}
+
+	.metadata dd {
+		margin: 0;
+		color: var(--sl-color-text);
+	}
+
+	.tags,
+	.wcag-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.tags li,
+	.wcag-tags li {
+		margin-block-start: 0;
+		padding: 0.15rem 0.55rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999px;
+		background: var(--sl-color-gray-7);
+	}
+
+	.supporting li {
+		border-style: dashed;
+	}
+
+	.wcag-tags li {
+		display: inline-flex;
+		gap: 0.35rem;
+		align-items: baseline;
+	}
+
+	.wcag-tags .level {
+		font-size: var(--sl-text-xs);
+		font-weight: 700;
+	}
+</style>
