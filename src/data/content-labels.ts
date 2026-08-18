@@ -21,8 +21,8 @@ export const requirementLabels: Record<Requirement, string> = {
 };
 
 export const conditionLabels: Record<Condition, string> = {
-	always: '常に確認する',
-	conditional: '該当する機能・コンテンツがある場合',
+	always: '常に確認',
+	conditional: '該当する場合に確認',
 };
 
 export const handoffLabels: Record<Handoff, string> = {

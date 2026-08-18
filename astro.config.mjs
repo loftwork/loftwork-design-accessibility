@@ -56,7 +56,7 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Practices',
+					label: 'Practice',
 					items: [{ autogenerate: { directory: 'practices' } }],
 				},
 				{

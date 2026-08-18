@@ -35,10 +35,17 @@ export interface Practice {
 	wcag: Array<{ id: string; level: WcagLevel }>;
 }
 
+export interface RequirementPolicy {
+	baselineWcagLevels: WcagLevel[];
+	baselineAA: string[];
+	requirementResolution: string[];
+}
+
 export interface PracticeMaster {
 	version: '1.0';
 	contentModelVersion: '0.4';
 	requirementPolicyVersion: '1.0';
+	policy: RequirementPolicy;
 	lenses: Lens[];
 	practices: Practice[];
 }
@@ -48,6 +55,7 @@ export const lenses = practiceMaster.lenses;
 export const practices = practiceMaster.practices;
 export const lensIds = lenses.map(({ id }) => id);
 export const practiceIds = practices.map(({ id }) => id);
+export const baselineAaIds = practiceMaster.policy.baselineAA;
 
 const lensById = new Map(lenses.map((lens) => [lens.id, lens]));
 const practiceById = new Map(practices.map((practice) => [practice.id, practice]));

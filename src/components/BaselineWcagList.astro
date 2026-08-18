@@ -1,0 +1,12 @@
+---
+import { baselineAaIds } from '../data/practice-master';
+import { getWcagCriterion } from '../data/wcag';
+
+const criteria = baselineAaIds.map(getWcagCriterion);
+---
+
+<ul class="baseline-wcag-list" aria-label="標準品質とするWCAG 2.2 Level AA達成基準">
+	{criteria.map((criterion) => (
+		<li>{criterion.id} {criterion.titleJa}</li>
+	))}
+</ul>

@@ -56,6 +56,7 @@ Canonical Source自体は変更しません。`.generated/`はGit管理せず、
 | By Phase | Masterの`primary` / `supporting` |
 | Lens Standards表 | Primary LensのPracticeに対応するWCAGを集約 |
 | WCAG達成基準名 | WCAG中央参照のWAIC日本語訳タイトル |
+| 標準品質とするLevel AA一覧 | Practice Masterの`policy.baselineAA`とWCAG中央参照を結合 |
 | WCAG逆引き | WCAG中央参照とMasterを結合 |
 
 ## Validator

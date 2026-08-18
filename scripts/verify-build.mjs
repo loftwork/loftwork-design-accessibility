@@ -59,7 +59,15 @@ for (const criterion of criteria) {
 
 await assertPracticeMetadata('OP-01', (html) => html.includes('2.1.1') && !html.includes('4.1.2'), 'OP-01は2.1.1のみである必要があります。');
 await assertPracticeMetadata('OP-10', (html) => html.includes('4.1.2'), 'OP-10に4.1.2がありません。');
-await assertPracticeMetadata('NV-06', (html) => html.includes('常に確認する'), 'NV-06がAlways表示になっていません。');
+await assertPracticeMetadata('NV-06', (html) => html.includes('常に確認'), 'NV-06がAlways表示になっていません。');
+
+const baselineAaList = standardsHtml.match(/<ul class="[^"]*\bbaseline-wcag-list\b[^"]*"[^>]*>([\s\S]*?)<\/ul>/)?.[1] ?? '';
+for (const id of master.policy.baselineAA) {
+	const criterion = criteria.find((candidate) => candidate.id === id);
+	if (!criterion || !baselineAaList.includes(`${criterion.id} ${criterion.titleJa}`)) {
+		throw new Error(`${id}: 標準品質のLevel AA一覧にMaster由来の達成基準がありません。`);
+	}
+}
 
 const htmlFiles = await collectHtmlFiles(outputDirectory);
 const brokenLinks = [];

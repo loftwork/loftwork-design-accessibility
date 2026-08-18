@@ -1,14 +1,25 @@
 ---
 title: WCAG 2.2
-description: WCAG 2.2 Level A・AAの55基準から、対応するAccessible Design Practiceを逆引きできます。
+description: WCAG 2.2 Level A・AAの55基準から、対応するPracticeを逆引きできます。
 contentType: page
 ---
 
 import WcagTable from '../../../components/WcagTable.astro';
+import BaselineWcagList from '../../../components/BaselineWcagList.astro';
 
-このガイドはWCAGの達成基準番号を主なナビゲーションにはしません。WCAG 2.2は、Human LensとPracticeの背景にあるトレーサビリティとして扱います。
+このガイドは、WCAGの達成基準番号を主なナビゲーションにはしません。人の体験を考えるHuman Lensと、制作時の判断を示すPracticeを主な入口とし、WCAG 2.2はその背景にあるトレーサビリティとして扱います。
 
-以下の表では、WCAG 2.2 Level A・AAの55基準から対応するPracticeを確認できます。WCAG Levelと、このガイドの要求レベルである「標準品質」「案件に応じて判断」は別の分類です。
+以下の表では、WCAG 2.2 Level A・AAの55基準から対応するPracticeを確認できます。Practiceとの対応は、規格上の要求を人の体験とデザイン判断へ結びつけるためのものであり、個別のサイトや成果物がWCAGへ適合していることを示すものではありません。
+
+## WCAG Levelと標準品質
+
+WCAGの`Level A` / `Level AA`と、このガイドの「標準品質」/「案件に応じて判断」は別の分類です。
+
+このガイドでは、WCAG 2.2 Level Aを基礎に、Web制作の基本品質として重要だと考える次のLevel AAも「標準品質」としています。
+
+<BaselineWcagList />
+
+「案件に応じて判断」は、対応しなくてよいという意味ではありません。対象ユーザー、機能、品質目標、スコープなどを踏まえて適用を判断します。
 
 <aside class="source-note" aria-label="参照資料について">
   <small>
