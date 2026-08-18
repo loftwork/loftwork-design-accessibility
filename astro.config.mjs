@@ -38,8 +38,8 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Introduction',
-					items: [{ slug: 'introduction' }],
+					label: 'はじめに',
+					items: [{ slug: 'introduction', label: 'このガイドについて' }],
 				},
 			{
 				label: 'Human Lens',
