@@ -117,7 +117,15 @@ function renderDocument(frontmatter, derivedFields, body) {
 }
 
 async function removeGeneratedFiles(directory, isGenerated) {
-	for (const name of await readdir(directory)) {
+	let names;
+	try {
+		names = await readdir(directory);
+	} catch (error) {
+		if (error?.code === 'ENOENT') return;
+		throw error;
+	}
+
+	for (const name of names) {
 		if (isGenerated(name)) await unlink(path.join(directory, name));
 	}
 }
