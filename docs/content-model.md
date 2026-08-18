@@ -1,52 +1,68 @@
-# コンテンツモデル実装メモ
+# Content Model v1.0 実装メモ
 
-この文書は、Accessible Design Guideの原稿を更新する人がfrontmatterと中央参照データの役割を確認するためのメモです。
+## データの責務
 
-## 共通方針
+### Practice Master
 
-- Starlight標準の`title`をページタイトルに使用する。
-- pilot原稿の`summary`はStarlight標準の`description`へ移し、重複保持しない。
-- すべてのドキュメントで`contentType`を指定する。
-- `contentType`は`page`、`lens`、`practice`のいずれかとする。
-- Practiceだけが必要とする項目は、`contentType: practice`のときだけ必須になる。
+`content-source/practice-master-v1.0/practice-master.json`が構造化された事実の唯一の正本です。
 
-## Practice
+- Practice IDと正式タイトル
+- Primary / Related Lens
+- Priority / Requirement
+- Condition / appliesTo
+- Decide / Design / Reviewの重み
+- Development Handoff
+- WCAG IDとLevel
 
-Practice IDは一般的な`id`と区別するため、frontmatterでは`practiceId`を使用する。
+一覧、Badge、メタデータ、逆引き表示はこのMasterから生成します。個別Markdownのfrontmatterへ同じ情報を手書きしません。
 
-```yaml
-contentType: practice
-practiceId: OP-01
-title: ひとつの操作方法だけに頼らない
-description: 特定の入力方法だけを使えることを前提にせず、異なる操作方法でも同じ目的を達成できるように設計します。
-primaryLens: operate
-priority: standard
-condition: always
-phases:
-  decide: primary
-  design: primary
-  review: primary
-wcag:
-  - "2.1.1"
-```
+### Editorial Content
 
-- `priority`はLoftworkとしての品質判断であり、WCAG Levelから導出しない。
-- `condition`は適用条件であり、`priority`とは別に管理する。
-- WCAGの名称、Level、WAIC日本語訳への参照先はfrontmatterへ書かず、`src/data/wcag.ts`から取得する。
-- Lensの正式な参照情報は`src/data/lenses.ts`で管理する。
+`content-source/editorial-content-v1.0/`が人が読む文章の正本です。
 
-## 生成される表示
+- Lens: Question、Why、Situations、Review、Explore
+- Practice: Summary、Body、Consider、Explore
 
-- Practiceページのタイトル直後に表示されるメタデータは、Starlightの`PageTitle`拡張がfrontmatterから生成する。
-- LensとPractices一覧は`PracticeList.astro`が生成する。
-- Decide、Design、Reviewの一覧は同じPracticeデータをフェーズで絞り込んで生成する。
-- フェーズ別一覧は`primary`、`supporting`、Practice IDの順で並ぶ。
-- WCAGの表と参照一覧は、IDを使って`src/data/wcag.ts`から名称とLevelを解決する。
+Practiceは`practiceId`、Lensは`lensId`でMasterへ結合します。Editorial原稿には正式タイトル、Lens分類、Phase、Requirement、Condition、Handoff、WCAGを重複保持しません。
 
-このため、Practice本文、Lens本文、フェーズ別ページへPracticeの説明文をコピーしない。
+### WCAG中央参照
 
-## 未収録のLens
+`src/data/wcag.json`はWCAG 2.2 Level A 31基準、AA 24基準の英語原文名、WAIC日本語訳の表示名、Level、原則、参照URL用slugを保持します。画面上の達成基準名には`titleJa`を使用し、`title`の英語原文名は参照データとして保持します。
 
-pilot原稿では`navigate`、`adapt`、`perceive`、`recover`、`understand`が関連Lensとして参照されているが、正式な名称、順序、問いは提供されていない。
+Master内のWCAG対応とLevelが中央参照データに一致し、55基準すべてに1件以上のPracticeが対応することを`validate-reference-data.mjs`で検証します。WCAG LevelとLoftworkのRequirementは別の分類として表示します。
 
-そのため、現在は有効なIDとしてのみ管理し、正式な参照データを推測で追加しない。
+## Starlightページの生成
+
+`scripts/generate-content.mjs`は両Canonical Sourceを読み込み、`.generated/docs/`へStarlight用ページを生成します。
+
+生成時にのみ次を付与・変換します。
+
+- Master由来の`title`
+- Editorial Summary由来のStarlight `description`
+- LensのPractice一覧生成コンポーネント
+- LensのWCAG表生成コンポーネント
+- 日本語テキストに隣接したMarkdown強調記法のHTML正規化
+
+Canonical Source自体は変更しません。`.generated/`はGit管理せず、`dev`、`check`、`build`の前に再生成します。
+
+## 表示の生成元
+
+| 表示 | 生成元 |
+|---|---|
+| Practiceタイトル、Badge、Lens、Phase、Condition、Requirement、Handoff | Practice Master |
+| Practice本文、Summary、Consider、Explore | Editorial Content |
+| Lens本文 | Editorial Content |
+| Lens内Practice一覧 | Primary LensでMasterを抽出 |
+| By Phase | Masterの`primary` / `supporting` |
+| Lens Standards表 | Primary LensのPracticeに対応するWCAGを集約 |
+| WCAG達成基準名 | WCAG中央参照のWAIC日本語訳タイトル |
+| WCAG逆引き | WCAG中央参照とMasterを結合 |
+
+## Validator
+
+- `content-source/practice-master-v1.0/validate.mjs`
+- `content-source/editorial-content-v1.0/validate.mjs`
+- `scripts/validate-reference-data.mjs`
+- `scripts/verify-build.mjs`
+
+両Canonical Validatorと中央参照Validatorはページ生成・Astro buildより前に実行します。Build後は、51 Practice、7 Lens、Lens別・Phase別順序、WCAG 55基準、内部リンク、OP-01／OP-10／NV-06を生成HTMLで再確認します。

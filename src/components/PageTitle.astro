@@ -1,21 +1,10 @@
 ---
 import Default from '@astrojs/starlight/components/PageTitle.astro';
-import type { PracticeFields } from '../schemas/content';
 import PracticeMeta from './PracticeMeta.astro';
 
 const data = Astro.locals.starlightRoute.entry.data;
-const practice = data.contentType === 'practice' ? (data as typeof data & PracticeFields) : undefined;
+const practiceId = data.contentType === 'practice' ? (data as { practiceId: string }).practiceId : undefined;
 ---
 
 <Default />
-
-{practice && (
-	<PracticeMeta
-		practiceId={practice.practiceId}
-		primaryLens={practice.primaryLens}
-		priority={practice.priority}
-		condition={practice.condition}
-		phases={practice.phases}
-		wcag={practice.wcag}
-	/>
-)}
+{practiceId && <PracticeMeta practiceId={practiceId} />}

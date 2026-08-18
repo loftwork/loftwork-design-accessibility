@@ -1,35 +1,32 @@
 import { z } from 'astro/zod';
-import { lensIds } from '../data/lenses';
-import { wcagIds } from '../data/wcag';
+import { lensIds, practiceIds } from '../data/practice-master';
 
-export const phaseStrengthSchema = z.enum(['primary', 'supporting']);
+const sourceFieldsSchema = z.object({
+	editorialVersion: z.literal('1.0'),
+	sourceTier: z.enum([
+		'canonical-conversation',
+		'pilot-repository-adapted',
+		'canonical-conversation-completed',
+		'pilot-repository-aligned',
+	]),
+	sourceConversation: z.string().optional(),
+	sourceRepository: z.string().optional(),
+	sourceCommit: z.string().optional(),
+	referenceUrl: z.url().optional(),
+});
 
 export const pageFieldsSchema = z.object({
 	contentType: z.literal('page'),
 });
 
-export const lensFieldsSchema = z.object({
+export const lensFieldsSchema = sourceFieldsSchema.extend({
 	contentType: z.literal('lens'),
-	lensId: z.enum(lensIds),
-	order: z.number().int().positive(),
-	question: z.string().min(1),
+	lensId: z.string().refine((id) => lensIds.includes(id), 'Practice Masterに存在しないLens IDです。'),
 });
 
-export const practiceFieldsSchema = z.object({
+export const practiceFieldsSchema = sourceFieldsSchema.extend({
 	contentType: z.literal('practice'),
-	practiceId: z.string().regex(/^[A-Z]{2}-\d{2}$/, 'Practice IDは「OP-01」の形式で指定してください。'),
-	description: z.string().min(1),
-	primaryLens: z.enum(lensIds),
-	relatedLens: z.array(z.enum(lensIds)).optional(),
-	priority: z.enum(['standard', 'recommended']),
-	condition: z.enum(['always', 'conditional']),
-	appliesTo: z.array(z.string().min(1)).optional(),
-	phases: z.object({
-		decide: phaseStrengthSchema.optional(),
-		design: phaseStrengthSchema.optional(),
-		review: phaseStrengthSchema.optional(),
-	}),
-	wcag: z.array(z.enum(wcagIds)).min(1),
+	practiceId: z.string().refine((id) => practiceIds.includes(id), 'Practice Masterに存在しないPractice IDです。'),
 });
 
 export const contentFieldsSchema = z.discriminatedUnion('contentType', [
@@ -38,5 +35,5 @@ export const contentFieldsSchema = z.discriminatedUnion('contentType', [
 	practiceFieldsSchema,
 ]);
 
-export type PhaseStrength = z.infer<typeof phaseStrengthSchema>;
+export type LensFields = z.infer<typeof lensFieldsSchema>;
 export type PracticeFields = z.infer<typeof practiceFieldsSchema>;

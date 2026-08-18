@@ -1,0 +1,340 @@
+{
+  "version": "1.0",
+  "contentModelVersion": "0.4",
+  "requirementPolicyVersion": "1.0",
+  "sourceSnapshot": {
+    "pilotRepository": "loftwork/loftwork-design-accessibility",
+    "pilotCommit": "b104fe4487e231af0870c27a8b2794a98344ab0c",
+    "canonicalConversation": "6a7ec4f5-d678-83e8-8d42-93d9a00861f0"
+  },
+  "lenses": [
+    { "id": "perceive", "title": "見る・知覚する", "prefix": "PE", "order": 1 },
+    { "id": "structure", "title": "構造を理解する", "prefix": "ST", "order": 2 },
+    { "id": "navigate", "title": "移動する・見つける", "prefix": "NV", "order": 3 },
+    { "id": "operate", "title": "操作する", "prefix": "OP", "order": 4 },
+    { "id": "understand", "title": "理解する・予測する", "prefix": "UN", "order": 5 },
+    { "id": "input", "title": "入力する・失敗から戻る", "prefix": "IN", "order": 6 },
+    { "id": "adapt", "title": "自分の状況に合わせる", "prefix": "AD", "order": 7 }
+  ],
+  "vocabulary": {
+    "priority": ["standard"],
+    "requirement": ["baseline", "project-dependent"],
+    "condition": ["always", "conditional"],
+    "phaseWeight": ["primary", "supporting"],
+    "handoff": ["development"],
+    "appliesToBase": [
+      "informative-image",
+      "prerecorded-audio",
+      "prerecorded-video",
+      "live-video",
+      "autoplay-audio",
+      "form",
+      "validated-input",
+      "consequential-submission",
+      "multi-step-process",
+      "authentication",
+      "dynamic-status-message",
+      "time-limit",
+      "moving-or-auto-updating-content",
+      "flashing-content",
+      "hover-or-focus-content",
+      "repeated-function",
+      "repeated-help",
+      "dragging-interaction",
+      "pointer-gesture"
+    ],
+    "appliesToSchemaCompletion": [
+      "multi-page-site",
+      "fixed-or-overlapping-ui",
+      "pointer-action",
+      "motion-actuation",
+      "complex-interaction",
+      "character-key-shortcut"
+    ]
+  },
+  "policy": {
+    "baselineWcagLevels": ["A"],
+    "baselineAA": ["1.4.3", "1.4.10", "1.4.11", "2.4.7", "2.4.11", "2.5.8"],
+    "requirementResolution": [
+      "Use an explicit requirements override when present.",
+      "Otherwise, a Practice containing a Level A criterion is baseline.",
+      "Otherwise, a Practice containing a criterion in baselineAA is baseline.",
+      "Otherwise, an AA-only Practice is project-dependent."
+    ]
+  },
+  "practices": [
+    {
+      "id": "PE-01", "title": "画像や図の意味を別の方法でも伝える", "primaryLens": "perceive", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.1.1", "level": "A" }]
+    },
+    {
+      "id": "PE-02", "title": "音声だけの情報を別の方法でも受け取れるようにする", "primaryLens": "perceive", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["prerecorded-audio"], "phases": { "decide": "primary", "design": null, "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "1.2.1", "level": "A" }]
+    },
+    {
+      "id": "PE-03", "title": "映像だけの情報を別の方法でも受け取れるようにする", "primaryLens": "perceive", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["prerecorded-video"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "1.2.1", "level": "A" }]
+    },
+    {
+      "id": "PE-04", "title": "動画の音声情報を字幕でも伝える", "primaryLens": "perceive", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["prerecorded-video", "live-video"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.2.2", "level": "A" }, { "id": "1.2.4", "level": "AA" }],
+      "requirements": [
+        { "wcag": ["1.2.2"], "appliesTo": ["prerecorded-video"], "requirement": "baseline" },
+        { "wcag": ["1.2.4"], "appliesTo": ["live-video"], "requirement": "project-dependent" }
+      ]
+    },
+    {
+      "id": "PE-05", "title": "映像でしか分からない情報を別の方法でも伝える", "primaryLens": "perceive", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["prerecorded-video"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.2.3", "level": "A" }, { "id": "1.2.5", "level": "AA" }],
+      "requirements": [
+        { "wcag": ["1.2.3"], "appliesTo": ["prerecorded-video"], "requirement": "baseline" },
+        { "wcag": ["1.2.5"], "appliesTo": ["prerecorded-video"], "requirement": "project-dependent" }
+      ]
+    },
+    {
+      "id": "PE-06", "title": "色だけで意味や状態を伝えない", "primaryLens": "perceive", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.1", "level": "A" }]
+    },
+    {
+      "id": "PE-07", "title": "文字を十分なコントラストで表示する", "primaryLens": "perceive", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.3", "level": "AA" }]
+    },
+    {
+      "id": "PE-08", "title": "UIや意味のある図形を識別できるようにする", "primaryLens": "perceive", "relatedLens": ["operate"],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": null, "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.11", "level": "AA" }]
+    },
+    {
+      "id": "PE-09", "title": "文字を画像にせず、拡大して読めるようにする", "primaryLens": "perceive", "relatedLens": ["adapt"],
+      "priority": "standard", "requirement": "project-dependent", "condition": "always", "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.4", "level": "AA" }, { "id": "1.4.5", "level": "AA" }]
+    },
+
+    {
+      "id": "ST-01", "title": "見た目だけに頼らず情報の関係を設計する", "primaryLens": "structure", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.3.1", "level": "A" }]
+    },
+    {
+      "id": "ST-02", "title": "意味のある順序を情報構造として設計する", "primaryLens": "structure", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.3.2", "level": "A" }]
+    },
+    {
+      "id": "ST-03", "title": "位置・形・大きさ・音だけで指示しない", "primaryLens": "structure", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "1.3.3", "level": "A" }]
+    },
+    {
+      "id": "ST-04", "title": "見出しとラベルで内容や目的を説明する", "primaryLens": "structure", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.4.6", "level": "AA" }]
+    },
+    {
+      "id": "ST-05", "title": "画面幅が変わっても情報や機能を失わない", "primaryLens": "structure", "relatedLens": ["adapt"],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.10", "level": "AA" }]
+    },
+    {
+      "id": "ST-06", "title": "文字間隔が変わっても情報や機能を失わない", "primaryLens": "structure", "relatedLens": ["adapt"],
+      "priority": "standard", "requirement": "project-dependent", "condition": "always", "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.12", "level": "AA" }]
+    },
+
+    {
+      "id": "NV-01", "title": "繰り返される領域を飛ばせる構造にする", "primaryLens": "navigate", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "supporting", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.4.1", "level": "A" }]
+    },
+    {
+      "id": "NV-02", "title": "ページの内容や目的が分かるタイトルをつける", "primaryLens": "navigate", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": null, "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.4.2", "level": "A" }]
+    },
+    {
+      "id": "NV-03", "title": "リンク先を文脈から理解できる名前にする", "primaryLens": "navigate", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.4.4", "level": "A" }]
+    },
+    {
+      "id": "NV-04", "title": "コンテンツへ複数の方法でたどり着けるようにする", "primaryLens": "navigate", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["multi-page-site"], "phases": { "decide": "primary", "design": null, "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "2.4.5", "level": "AA" }]
+    },
+    {
+      "id": "NV-05", "title": "繰り返すナビゲーションの位置と順序を一貫させる", "primaryLens": "navigate", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["repeated-function"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "3.2.3", "level": "AA" }]
+    },
+    {
+      "id": "NV-06", "title": "キーボード操作中の現在位置を見えるようにする", "primaryLens": "navigate", "relatedLens": ["operate"],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": null, "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.4.7", "level": "AA" }]
+    },
+    {
+      "id": "NV-07", "title": "固定UIなどで現在の操作位置を隠さない", "primaryLens": "navigate", "relatedLens": ["operate"],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["fixed-or-overlapping-ui"], "phases": { "decide": null, "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.4.11", "level": "AA" }]
+    },
+
+    {
+      "id": "OP-01", "title": "ひとつの操作方法だけに頼らない", "primaryLens": "operate", "relatedLens": ["navigate"],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.1.1", "level": "A" }]
+    },
+    {
+      "id": "OP-02", "title": "ドラッグだけに頼らない", "primaryLens": "operate", "relatedLens": ["adapt"],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["dragging-interaction"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.5.7", "level": "AA" }]
+    },
+    {
+      "id": "OP-03", "title": "複雑なジェスチャーだけに頼らない", "primaryLens": "operate", "relatedLens": ["adapt"],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["pointer-gesture"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.5.1", "level": "A" }]
+    },
+    {
+      "id": "OP-04", "title": "小さく精密な操作を要求しない", "primaryLens": "operate", "relatedLens": ["perceive", "adapt"],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.5.8", "level": "AA" }]
+    },
+    {
+      "id": "OP-05", "title": "押し間違えても取り消せるようにする", "primaryLens": "operate", "relatedLens": ["input"],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["pointer-action"], "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.5.2", "level": "A" }]
+    },
+    {
+      "id": "OP-06", "title": "見えている名前と操作上の名前を一致させる", "primaryLens": "operate", "relatedLens": ["understand"],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.5.3", "level": "A" }]
+    },
+    {
+      "id": "OP-07", "title": "身体や端末の動きだけに頼らない", "primaryLens": "operate", "relatedLens": ["adapt"],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["motion-actuation"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.5.4", "level": "A" }]
+    },
+    {
+      "id": "OP-08", "title": "操作した後の行き先を想像する", "primaryLens": "operate", "relatedLens": ["navigate", "understand"],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["complex-interaction"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.1.2", "level": "A" }, { "id": "2.4.3", "level": "A" }]
+    },
+    {
+      "id": "OP-09", "title": "1文字のショートカットを意図せず実行させない", "primaryLens": "operate", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["character-key-shortcut"], "phases": { "decide": "primary", "design": "supporting", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.1.4", "level": "A" }]
+    },
+    {
+      "id": "OP-10", "title": "UIの役割と状態を明確にする", "primaryLens": "operate", "relatedLens": ["understand"],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "4.1.2", "level": "A" }]
+    },
+
+    {
+      "id": "UN-01", "title": "フォーカスしただけで予期しない変化を起こさない", "primaryLens": "understand", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "3.2.1", "level": "A" }]
+    },
+    {
+      "id": "UN-02", "title": "入力しただけで予期しない変化を起こさない", "primaryLens": "understand", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "3.2.2", "level": "A" }]
+    },
+    {
+      "id": "UN-03", "title": "同じ機能を一貫した名前と見た目で示す", "primaryLens": "understand", "relatedLens": ["navigate"],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["repeated-function"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "3.2.4", "level": "AA" }]
+    },
+    {
+      "id": "UN-04", "title": "ヘルプを予測できる場所に置く", "primaryLens": "understand", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["repeated-help"], "phases": { "decide": "primary", "design": "supporting", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "3.2.6", "level": "A" }]
+    },
+    {
+      "id": "UN-05", "title": "ページやコンテンツの言語を明確にする", "primaryLens": "understand", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "always", "phases": { "decide": "primary", "design": null, "review": "supporting" },
+      "handoff": ["development"], "wcag": [{ "id": "3.1.1", "level": "A" }, { "id": "3.1.2", "level": "AA" }],
+      "requirements": [
+        { "wcag": ["3.1.1"], "requirement": "baseline" },
+        { "wcag": ["3.1.2"], "requirement": "project-dependent" }
+      ]
+    },
+    {
+      "id": "UN-06", "title": "自動再生する音をユーザーが止められるようにする", "primaryLens": "understand", "relatedLens": ["perceive", "adapt"],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["autoplay-audio"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.2", "level": "A" }]
+    },
+
+    {
+      "id": "IN-01", "title": "入力に必要なラベルや説明を用意する", "primaryLens": "input", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["form"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "3.3.2", "level": "A" }]
+    },
+    {
+      "id": "IN-02", "title": "エラーが起きた場所と内容を言葉で伝える", "primaryLens": "input", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["validated-input"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "3.3.1", "level": "A" }]
+    },
+    {
+      "id": "IN-03", "title": "直し方が分かるエラーにする", "primaryLens": "input", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["validated-input"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "3.3.3", "level": "AA" }]
+    },
+    {
+      "id": "IN-04", "title": "重要な操作は確認・修正・取消できるようにする", "primaryLens": "input", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["consequential-submission"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "3.3.4", "level": "AA" }]
+    },
+    {
+      "id": "IN-05", "title": "同じ情報を何度も入力させない", "primaryLens": "input", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["multi-step-process"], "phases": { "decide": "primary", "design": "supporting", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "3.3.7", "level": "A" }]
+    },
+    {
+      "id": "IN-06", "title": "入力内容の目的を機械的にも判断できるようにする", "primaryLens": "input", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["form"], "phases": { "decide": "primary", "design": "supporting", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.3.5", "level": "AA" }]
+    },
+    {
+      "id": "IN-07", "title": "記憶やパズルだけに頼る認証を要求しない", "primaryLens": "input", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["authentication"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "3.3.8", "level": "AA" }]
+    },
+    {
+      "id": "IN-08", "title": "操作結果や状態の変化を見逃さないようにする", "primaryLens": "input", "relatedLens": ["understand"],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["dynamic-status-message"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "4.1.3", "level": "AA" }]
+    },
+
+    {
+      "id": "AD-01", "title": "画面の向きを固定しない", "primaryLens": "adapt", "relatedLens": [],
+      "priority": "standard", "requirement": "project-dependent", "condition": "always", "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.3.4", "level": "AA" }]
+    },
+    {
+      "id": "AD-02", "title": "時間制限を調整・延長できるようにする", "primaryLens": "adapt", "relatedLens": ["input"],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["time-limit"], "phases": { "decide": "primary", "design": "supporting", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.2.1", "level": "A" }]
+    },
+    {
+      "id": "AD-03", "title": "動く・点滅する・自動更新する情報を止められるようにする", "primaryLens": "adapt", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["moving-or-auto-updating-content"], "phases": { "decide": "primary", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "2.2.2", "level": "A" }]
+    },
+    {
+      "id": "AD-04", "title": "危険な点滅を使わない", "primaryLens": "adapt", "relatedLens": [],
+      "priority": "standard", "requirement": "baseline", "condition": "conditional", "appliesTo": ["flashing-content"], "phases": { "decide": null, "design": "primary", "review": "primary" },
+      "handoff": [], "wcag": [{ "id": "2.3.1", "level": "A" }]
+    },
+    {
+      "id": "AD-05", "title": "Hover / Focusで現れる情報をユーザー自身が扱えるようにする", "primaryLens": "adapt", "relatedLens": ["operate"],
+      "priority": "standard", "requirement": "project-dependent", "condition": "conditional", "appliesTo": ["hover-or-focus-content"], "phases": { "decide": "supporting", "design": "primary", "review": "primary" },
+      "handoff": ["development"], "wcag": [{ "id": "1.4.13", "level": "AA" }]
+    }
+  ]
+}

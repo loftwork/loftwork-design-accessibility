@@ -2,6 +2,11 @@
 	--sl-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
 }
 
+html,
+body {
+	overflow-x: hidden;
+}
+
 :focus-visible {
 	outline: 3px solid var(--sl-color-accent-high);
 	outline-offset: 3px;

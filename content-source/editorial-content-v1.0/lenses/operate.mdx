@@ -1,14 +1,11 @@
 ---
-title: 操作する
-description: 特定の身体能力や入力方法だけを前提にしていないかを問い直すHuman Lensです。
 contentType: lens
 lensId: operate
-order: 4
-question: 特定の身体能力や入力方法だけを前提にしていないだろうか？
+editorialVersion: "1.0"
+sourceTier: pilot-repository-aligned
+sourceRepository: "loftwork/loftwork-design-accessibility"
+sourceCommit: "b104fe4487e231af0870c27a8b2794a98344ab0c"
 ---
-
-import PracticeList from '../../../components/PracticeList.astro';
-import WcagTable from '../../../components/WcagTable.astro';
 
 ## Question
 
@@ -45,11 +42,11 @@ import WcagTable from '../../../components/WcagTable.astro';
 | Situational | 子どもを抱えていて、片手しか使えない |
 | Environment | 揺れる電車の中で、小さなスマートフォンを操作している |
 
-「どの障害のための対応か」だけではなく、<strong>このインターフェースは、ユーザーにどのような能力・精度・姿勢・入力方法を要求しているのか？</strong>という視点から考えます。
+「どの障害のための対応か」だけではなく、**このインターフェースは、ユーザーにどのような能力・精度・姿勢・入力方法を要求しているのか？**という視点から考えます。
 
 ## Practices
 
-<PracticeList primaryLens="operate" />
+<!-- PRACTICE_LIST: primaryLens=operate -->
 
 ## Review
 
@@ -72,9 +69,9 @@ import WcagTable from '../../../components/WcagTable.astro';
 
 しかし、別の見方もできます。
 
-ドラッグ操作が難しい人について考えることで、<strong>そもそも、このタスクにドラッグという精密な操作を要求する必要があるのか？</strong>と問い直せます。
+ドラッグ操作が難しい人について考えることで、**そもそも、このタスクにドラッグという精密な操作を要求する必要があるのか？**と問い直せます。
 
-小さなボタンを押しづらい人について考えることで、<strong>そもそも、これほど多くの操作を小さな領域へ詰め込む必要があるのか？</strong>と問い直せます。
+小さなボタンを押しづらい人について考えることで、**そもそも、これほど多くの操作を小さな領域へ詰め込む必要があるのか？**と問い直せます。
 
 アクセシビリティを考えることは、特殊なユーザーのための機能を後から追加することだけではありません。
 
@@ -84,20 +81,4 @@ import WcagTable from '../../../components/WcagTable.astro';
 
 ## Standards
 
-このLensは主に、以下のWCAG 2.2達成基準に関係します。
-
-<WcagTable
-  items={[
-    { id: '2.1.1', description: '特定の入力方法への依存' },
-    { id: '2.1.2', description: '操作から抜けられること' },
-    { id: '2.1.4', description: '独自ショートカット' },
-    { id: '2.4.3', description: '操作順序' },
-    { id: '2.5.1', description: '複雑なジェスチャー' },
-    { id: '2.5.2', description: '誤操作の回避' },
-    { id: '2.5.3', description: '表示名と操作上の名前' },
-    { id: '2.5.4', description: '身体・端末動作への依存' },
-    { id: '2.5.7', description: 'ドラッグ以外の操作' },
-    { id: '2.5.8', description: '操作領域' },
-    { id: '4.1.2', description: 'UIの意味・状態' },
-  ]}
-/>
+<!-- WCAG_TABLE: primaryLens=operate -->

@@ -1,6 +1,6 @@
 ---
 title: WCAG 2.2
-description: Lens 4「操作する」で参照するWCAG 2.2達成基準です。
+description: WCAG 2.2 Level A・AAの55基準から、対応するAccessible Design Practiceを逆引きできます。
 contentType: page
 ---
 
@@ -8,29 +8,16 @@ import WcagTable from '../../../components/WcagTable.astro';
 
 このガイドはWCAGの達成基準番号を主なナビゲーションにはしません。WCAG 2.2は、Human LensとPracticeの背景にあるトレーサビリティとして扱います。
 
-現在は、Lens 4「操作する」で使用する達成基準だけを収録しています。
+以下の表では、WCAG 2.2 Level A・AAの55基準から対応するPracticeを確認できます。WCAG Levelと、このガイドの要求レベルである「標準品質」「案件に応じて判断」は別の分類です。
 
 <aside class="source-note" aria-label="参照資料について">
   <small>
-    <strong>参照資料について:</strong> このページからリンクするWAICの日本語訳と解説書は参考情報です。WCAG 2.2の正式版は
-    <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">W3Cの英語版<span class="visually-hidden">（新しいタブで開く）</span></a>
-    です。
+    <strong>参照資料について:</strong> 表示する達成基準名は
+    <a href="https://waic.jp/translations/WCAG22/" target="_blank" rel="noopener noreferrer">WAICによるWCAG 2.2日本語訳<span class="visually-hidden">（新しいタブで開く）</span></a>
+    のタイトルを使用しています。達成基準のID、Level、英語原文は
+    <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">W3C WCAG 2.2 Recommendation<span class="visually-hidden">（新しいタブで開く）</span></a>
+    を正本とします。WCAG 2.2でobsolete and removedとなった4.1.1 Parsingは対象に含めません。
   </small>
 </aside>
 
-<WcagTable
-  label="Lens 4で参照するWCAG 2.2達成基準"
-  items={[
-    { id: '2.1.1' },
-    { id: '2.1.2' },
-    { id: '2.1.4' },
-    { id: '2.4.3' },
-    { id: '2.5.1' },
-    { id: '2.5.2' },
-    { id: '2.5.3' },
-    { id: '2.5.4' },
-    { id: '2.5.7' },
-    { id: '2.5.8' },
-    { id: '4.1.2' },
-  ]}
-/>
+<WcagTable showPractices={true} />

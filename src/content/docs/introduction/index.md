@@ -1,6 +1,6 @@
 ---
 title: このガイドについて
-description: Accessible Design Guideの目的と、現在のプロトタイプの範囲を説明します。
+description: Accessible Design Guideの目的と収録範囲を説明します。
 contentType: page
 ---
 
@@ -8,13 +8,11 @@ Accessible Design Guideは、達成基準の番号からではなく、人がど
 
 WCAG 2.2は、各Practiceの背景にあるトレーサビリティとして参照します。
 
-## 現在の範囲
+## 収録範囲
 
-現在は、コンテンツモデルと読み心地を検証するためのプロトタイプです。
-
-- Human Lens 4「操作する」
-- OP-01からOP-08までの8件のPractice
+- 7つのHuman Lens
+- 51件のPractice
 - Decide、Design、Reviewのフェーズ別一覧
-- Lens 4で参照するWCAG 2.2達成基準
+- WCAG 2.2 Level A・AA 55基準からの逆引き
 
-すべてのLensを揃えることや、最終的なビジュアルデザインを作ることは、今回の範囲には含めていません。
+Practiceの分類、適用条件、制作フェーズ、要求レベル、開発への引き継ぎ、WCAG対応はPractice Masterから生成しています。

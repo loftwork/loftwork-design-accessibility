@@ -1,115 +1,76 @@
 ---
-import { getLens } from '../data/lenses';
-import { conditionLabels, phaseLabels, phaseStrengthLabels, priorityLabels } from '../data/content-labels';
-import type { PracticeFields } from '../schemas/content';
+import {
+	conditionLabels,
+	handoffLabels,
+	phaseLabels,
+	phaseWeightLabels,
+	priorityLabels,
+	requirementLabels,
+} from '../data/content-labels';
+import { getLens, getPractice, type Phase } from '../data/practice-master';
 import WcagRefs from './WcagRefs.astro';
 
-type Props = Pick<
-	PracticeFields,
-	'practiceId' | 'primaryLens' | 'priority' | 'condition' | 'phases' | 'wcag'
->;
+interface Props { practiceId: string; }
 
-const { practiceId, primaryLens, priority, condition, phases, wcag } = Astro.props;
-const lens = getLens(primaryLens);
-const baseUrl = import.meta.env.BASE_URL.endsWith('/')
-	? import.meta.env.BASE_URL
-	: `${import.meta.env.BASE_URL}/`;
-
-const activePhases = (Object.keys(phaseLabels) as Array<keyof typeof phaseLabels>)
-	.filter((phase) => phases[phase])
-	.map((phase) => ({
-		label: phaseLabels[phase],
-		strength: phaseStrengthLabels[phases[phase]!],
-	}));
+const practice = getPractice(Astro.props.practiceId);
+const primaryLens = getLens(practice.primaryLens);
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const phaseOrder: Phase[] = ['decide', 'design', 'review'];
+const activePhases = phaseOrder
+	.filter((phase) => practice.phases[phase] !== null)
+	.map((phase) => ({ label: phaseLabels[phase], weight: phaseWeightLabels[practice.phases[phase]!] }));
 ---
 
 <aside class="practice-meta" aria-label="Practice情報">
 	<dl>
-		<div>
-			<dt>Practice</dt>
-			<dd>{practiceId}</dd>
-		</div>
-		<div>
-			<dt>Primary Lens</dt>
-			<dd>
-				{lens ? <a href={`${baseUrl}lens/${lens.id}/`}>{lens.title}</a> : primaryLens}
-			</dd>
-		</div>
-		<div>
-			<dt>優先度</dt>
-			<dd>{priorityLabels[priority]}</dd>
-		</div>
-		{condition === 'conditional' && (
-			<div>
-				<dt>適用条件</dt>
-				<dd>{conditionLabels[condition]}</dd>
+		<div><dt>Practice</dt><dd>{practice.id}</dd></div>
+		<div><dt>Primary Lens</dt><dd><a href={`${baseUrl}lens/${primaryLens.id}/`}>{primaryLens.title}</a></dd></div>
+		<div><dt>優先度</dt><dd><span class="badge">{priorityLabels[practice.priority]}</span></dd></div>
+		<div><dt>要求レベル</dt><dd><span class="badge requirement">{requirementLabels[practice.requirement]}</span></dd></div>
+		<div><dt>適用</dt><dd>{conditionLabels[practice.condition]}</dd></div>
+		{practice.relatedLens.length > 0 && (
+			<div class="wide">
+				<dt>Related Lens</dt>
+				<dd><ul class="tags">{practice.relatedLens.map((id) => <li><a href={`${baseUrl}lens/${id}/`}>{getLens(id).title}</a></li>)}</ul></dd>
 			</div>
 		)}
-		<div class="wide">
-			<dt>関連するフェーズ</dt>
-			<dd>
-				<ul class="tags">
-					{activePhases.map((phase) => (
-						<li>{phase.label}（{phase.strength}）</li>
-					))}
-				</ul>
-			</dd>
-		</div>
-		<div class="wide">
-			<dt>関連するWCAG 2.2</dt>
-			<dd><WcagRefs ids={wcag} /></dd>
-		</div>
+		{practice.appliesTo && (
+			<div class="wide"><dt>該当する対象</dt><dd><ul class="tags">{practice.appliesTo.map((term) => <li><code>{term}</code></li>)}</ul></dd></div>
+		)}
+		<div class="wide"><dt>関連するフェーズ</dt><dd><ul class="tags">{activePhases.map((phase) => <li>{phase.label}（{phase.weight}）</li>)}</ul></dd></div>
+		{practice.handoff.length > 0 && (
+			<div class="wide"><dt>Handoff</dt><dd><ul class="tags handoff">{practice.handoff.map((handoff) => <li>{handoffLabels[handoff]}</li>)}</ul></dd></div>
+		)}
+		<div class="wide"><dt>関連するWCAG 2.2</dt><dd><WcagRefs ids={practice.wcag.map(({ id }) => id)} /></dd></div>
+		{practice.requirements && (
+			<div class="wide">
+				<dt>条件・基準別の要求レベル</dt>
+				<dd>
+					<ul class="overrides">
+						{practice.requirements.map((override) => (
+							<li>
+								<span>{override.wcag?.join(', ') ?? override.appliesTo?.join(', ')}</span>
+								<span class="badge requirement">{requirementLabels[override.requirement]}</span>
+							</li>
+						))}
+					</ul>
+				</dd>
+			</div>
+		)}
 	</dl>
 </aside>
 
 <style>
-	.practice-meta {
-		margin-block: 1.5rem 2rem;
-		padding: 1rem;
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.5rem;
-		background: var(--sl-color-gray-7);
-	}
-
-	dl {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-		gap: 1rem;
-		margin: 0;
-	}
-
-	dl > div {
-		min-width: 0;
-	}
-
-	.wide {
-		grid-column: 1 / -1;
-	}
-
-	dt {
-		margin-bottom: 0.25rem;
-		color: var(--sl-color-gray-2);
-		font-size: var(--sl-text-sm);
-		font-weight: 700;
-	}
-
-	dd {
-		margin: 0;
-	}
-
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.4rem;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.tags li {
-		padding: 0.15rem 0.55rem;
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 999px;
-		font-size: var(--sl-text-sm);
-	}
+	.practice-meta { margin-block: 1.5rem 2rem; padding: 1rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem; background: var(--sl-color-gray-7); }
+	dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1rem; margin: 0; }
+	dl > div { min-width: 0; }
+	.wide { grid-column: 1 / -1; }
+	dt { margin-bottom: 0.25rem; color: var(--sl-color-gray-2); font-size: var(--sl-text-sm); font-weight: 700; }
+	dd { margin: 0; }
+	.tags, .overrides { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+	.tags li, .badge { padding: 0.15rem 0.55rem; border: 1px solid var(--sl-color-gray-5); border-radius: 999px; font-size: var(--sl-text-sm); }
+	.requirement { border-style: double; font-weight: 700; }
+	.handoff li { border-style: dashed; }
+	.overrides { display: grid; }
+	.overrides li { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: baseline; }
 </style>

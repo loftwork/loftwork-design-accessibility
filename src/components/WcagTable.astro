@@ -1,112 +1,72 @@
 ---
-import { getWcagCriterion, type WcagId } from '../data/wcag';
-
-interface Item {
-	id: WcagId;
-	description?: string;
-}
+import { requirementLabels } from '../data/content-labels';
+import { getPracticesByWcag, getWcagIdsByLens } from '../data/practice-master';
+import { wcagCriteria } from '../data/wcag';
 
 interface Props {
-	items: readonly Item[];
+	primaryLens?: string;
+	showPractices?: boolean;
 	label?: string;
 }
 
-const { items, label = '関連するWCAG 2.2達成基準' } = Astro.props;
-const rows = items.map((item) => ({ ...getWcagCriterion(item.id), description: item.description }));
-const hasDescriptions = rows.some((row) => row.description);
+const { primaryLens, showPractices = Boolean(Astro.props.primaryLens) } = Astro.props;
+const selectedIds = primaryLens ? new Set(getWcagIdsByLens(primaryLens)) : undefined;
+const rows = wcagCriteria.filter((criterion) => !selectedIds || selectedIds.has(criterion.id));
+const label = Astro.props.label ?? (primaryLens ? 'このLensで参照するWCAG 2.2達成基準' : 'WCAG 2.2 A・AA達成基準とPracticeの対応');
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <div class="table-wrap not-content" role="region" aria-label={label} tabindex="0">
 	<table>
 		<thead>
 			<tr>
-				<th scope="col">WCAG</th>
-				<th scope="col">達成基準</th>
-				<th scope="col">Level</th>
-				<th scope="col">参照</th>
-				{hasDescriptions && <th scope="col">このガイドで扱うこと</th>}
+				<th scope="col">WCAG</th><th scope="col">達成基準</th><th scope="col">Level</th><th scope="col">参照</th>
+				{showPractices && <th scope="col">対応するPractice</th>}
 			</tr>
 		</thead>
 		<tbody>
-			{rows.map((row) => (
-				<tr>
-					<th scope="row">{row.id}</th>
-					<td>{row.titleJa}</td>
-					<td><span class="level">{row.level}</span></td>
-					<td>
-						<ul class="reference-links">
-							<li>
-								<a href={row.understandingUrl} target="_blank" rel="noopener noreferrer">
-									解説書<span class="visually-hidden">（新しいタブで開く）</span>
-								</a>
-							</li>
-							<li>
-								<a href={row.translationUrl} target="_blank" rel="noopener noreferrer">
-									基準本文<span class="visually-hidden">（新しいタブで開く）</span>
-								</a>
-							</li>
-						</ul>
-					</td>
-					{hasDescriptions && <td>{row.description ?? '—'}</td>}
-				</tr>
-			))}
+			{rows.map((row) => {
+				const mappedPractices = getPracticesByWcag(row.id).filter((practice) => !primaryLens || practice.primaryLens === primaryLens);
+				return (
+					<tr id={`criterion-${row.id.replaceAll('.', '-')}`}>
+						<th scope="row">{row.id}</th>
+						<td>{row.titleJa}</td>
+						<td><span class="level">{row.level}</span></td>
+						<td>
+							<ul class="reference-links">
+								<li><a href={row.specificationUrl} target="_blank" rel="noopener noreferrer" aria-label={`${row.id} 基準本文（新しいタブで開く）`}>基準本文</a></li>
+								<li><a href={row.understandingUrl} target="_blank" rel="noopener noreferrer" aria-label={`${row.id} Understanding（新しいタブで開く）`}>Understanding</a></li>
+								<li><a href={row.translationUrl} target="_blank" rel="noopener noreferrer" aria-label={`${row.id} WAIC日本語訳（新しいタブで開く）`}>WAIC日本語訳</a></li>
+							</ul>
+						</td>
+						{showPractices && (
+							<td>
+								<ul class="practice-links">
+									{mappedPractices.map((practice) => (
+										<li>
+											<a href={`${baseUrl}practices/${practice.id.toLowerCase()}/`}>{practice.id} {practice.title}</a>
+											<span class="requirement">{requirementLabels[practice.requirement]}</span>
+										</li>
+									))}
+								</ul>
+							</td>
+						)}
+					</tr>
+				);
+			})}
 		</tbody>
 	</table>
 </div>
 
 <style>
-	.table-wrap {
-		overflow-x: auto;
-		margin-block: 1.25rem;
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.5rem;
-	}
-
-	.table-wrap:focus-visible {
-		outline: 3px solid var(--sl-color-accent-high);
-		outline-offset: 3px;
-	}
-
-	table {
-		width: 100%;
-		min-width: 38rem;
-		border-collapse: collapse;
-		font-size: var(--sl-text-sm);
-	}
-
-	th,
-	td {
-		padding: 0.65rem 0.8rem;
-		border-bottom: 1px solid var(--sl-color-gray-5);
-		text-align: left;
-		vertical-align: top;
-	}
-
-	thead th {
-		background: var(--sl-color-gray-6);
-	}
-
-	tbody tr:last-child > * {
-		border-bottom: 0;
-	}
-
-	.level {
-		display: inline-block;
-		min-width: 2.6em;
-		padding: 0.05rem 0.4rem;
-		border: 1px solid currentColor;
-		border-radius: 999px;
-		font-weight: 700;
-		text-align: center;
-	}
-
-	.reference-links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem 0.75rem;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
+	.table-wrap { contain: inline-size; overflow-x: auto; max-width: 100%; margin-block: 1.25rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem; }
+	.table-wrap:focus-visible { outline: 3px solid var(--sl-color-accent-high); outline-offset: 3px; }
+	table { width: 100%; min-width: 48rem; border-collapse: collapse; font-size: var(--sl-text-sm); }
+	th, td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--sl-color-gray-5); text-align: left; vertical-align: top; }
+	thead th { background: var(--sl-color-gray-6); }
+	tbody tr:last-child > * { border-bottom: 0; }
+	.level { display: inline-block; min-width: 2.6em; padding: 0.05rem 0.4rem; border: 1px solid currentColor; border-radius: 999px; font-weight: 700; text-align: center; }
+	.reference-links, .practice-links { display: grid; gap: 0.25rem; margin: 0; padding: 0; list-style: none; }
+	.practice-links li { display: grid; gap: 0.15rem; }
+	.requirement { color: var(--sl-color-gray-2); font-size: var(--sl-text-xs); }
 </style>

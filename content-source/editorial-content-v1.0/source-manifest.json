@@ -1,0 +1,357 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-08-18",
+  "canonicalConversation": "6a7ec4f5-d678-83e8-8d42-93d9a00861f0",
+  "pilotRepository": "loftwork/loftwork-design-accessibility",
+  "pilotCommit": "b104fe4487e231af0870c27a8b2794a98344ab0c",
+  "entries": [
+    {
+      "file": "lenses/adapt.mdx",
+      "id": "adapt",
+      "sourceTier": "canonical-conversation",
+      "sha256": "0fa8ecaf918ce94563d1842f721277bc21701bb9d2b38d0097547e73137aafb9"
+    },
+    {
+      "file": "lenses/input.mdx",
+      "id": "input",
+      "sourceTier": "canonical-conversation",
+      "sha256": "fb8edc50cc6faf4b42108dc87bc7e8cbba13c64974ab25b938e173c61c26e9de"
+    },
+    {
+      "file": "lenses/navigate.mdx",
+      "id": "navigate",
+      "sourceTier": "canonical-conversation",
+      "sha256": "e8fcaab1186350db8b881187146741f313f48d9ab90d50f2717d2224a1302226"
+    },
+    {
+      "file": "lenses/operate.mdx",
+      "id": "operate",
+      "sourceTier": "pilot-repository-aligned",
+      "sha256": "be9aedea28c24dae29cb07aeb1ab9278592f5ff49f43bb2165b152f530c0e803"
+    },
+    {
+      "file": "lenses/perceive.mdx",
+      "id": "perceive",
+      "sourceTier": "canonical-conversation",
+      "sha256": "88618e641a04936e6dcef70062e7d6e9c93dbe749273368c7030c08f2b79fd4c"
+    },
+    {
+      "file": "lenses/structure.mdx",
+      "id": "structure",
+      "sourceTier": "canonical-conversation",
+      "sha256": "27eefe65823c10f1098259b0314c880548308fe6bed963876263e5742e74674e"
+    },
+    {
+      "file": "lenses/understand.mdx",
+      "id": "understand",
+      "sourceTier": "canonical-conversation",
+      "sha256": "afdb99fd122426c25d3601737f7132fdab2f00f4ba04f0eb5decc923ad0b3217"
+    },
+    {
+      "file": "practices/ad-01.md",
+      "id": "AD-01",
+      "sourceTier": "canonical-conversation",
+      "sha256": "014d45136aa3a965cb4f7c43accdfed22247242d17907ff8c1bcd700ad85a6dc"
+    },
+    {
+      "file": "practices/ad-02.md",
+      "id": "AD-02",
+      "sourceTier": "canonical-conversation",
+      "sha256": "41f1a133b2b3f5fee22207aad831bd761c74d27a773c7a7f3d4aa032b6de401b"
+    },
+    {
+      "file": "practices/ad-03.md",
+      "id": "AD-03",
+      "sourceTier": "canonical-conversation",
+      "sha256": "82fe8af548b669c12481a31e3a784bb302bc97ed8acdb6bff7a99817156c0e82"
+    },
+    {
+      "file": "practices/ad-04.md",
+      "id": "AD-04",
+      "sourceTier": "canonical-conversation",
+      "sha256": "6a652a37b97eb88d9919422bc91b40a3ab1e4be5a039a74af829a1e65a371908"
+    },
+    {
+      "file": "practices/ad-05.md",
+      "id": "AD-05",
+      "sourceTier": "canonical-conversation",
+      "sha256": "a3a32bc5e083d909bc7f9a951eac071cf2fe578299850088a3c53633dfc55c93"
+    },
+    {
+      "file": "practices/in-01.md",
+      "id": "IN-01",
+      "sourceTier": "canonical-conversation",
+      "sha256": "a97079a722df139ca7fc50d1558840ecdd536728862e13515fbb503ea20e44b1"
+    },
+    {
+      "file": "practices/in-02.md",
+      "id": "IN-02",
+      "sourceTier": "canonical-conversation",
+      "sha256": "8c29e679b52ffb84f1a55f22fa47dffbc6a35ad055c52cc381a2eb3ab175750d"
+    },
+    {
+      "file": "practices/in-03.md",
+      "id": "IN-03",
+      "sourceTier": "canonical-conversation",
+      "sha256": "8455ceb95de1d24cb36371333b3e51485c1ee89ffc5fab4866d7038c71392b44"
+    },
+    {
+      "file": "practices/in-04.md",
+      "id": "IN-04",
+      "sourceTier": "canonical-conversation",
+      "sha256": "a3739e7495e5070da802aeb89327f0f8281af49339fd590cb8f97a5af84d2a85"
+    },
+    {
+      "file": "practices/in-05.md",
+      "id": "IN-05",
+      "sourceTier": "canonical-conversation",
+      "sha256": "2c0ac19a498609f7d609a4101ccb3500b47f146e6a7af0b4aa172197e1d0a043"
+    },
+    {
+      "file": "practices/in-06.md",
+      "id": "IN-06",
+      "sourceTier": "canonical-conversation",
+      "sha256": "8e0eea3c759e6ed2d48874d7c9fb63034010fe6a50e1d07623affb870ccc2094"
+    },
+    {
+      "file": "practices/in-07.md",
+      "id": "IN-07",
+      "sourceTier": "canonical-conversation",
+      "sha256": "bbb4293384070193e2598b74945aacb7064d9aba8ce3431901f0692cd9bb42a7"
+    },
+    {
+      "file": "practices/in-08.md",
+      "id": "IN-08",
+      "sourceTier": "canonical-conversation",
+      "sha256": "f0b628d135ec01261c8b137022c92aeb0a9f54305d4f5b4c5730b8fe4f1eb90e"
+    },
+    {
+      "file": "practices/nv-01.md",
+      "id": "NV-01",
+      "sourceTier": "canonical-conversation",
+      "sha256": "5035ab07c6c602a07a0acd72bc6d3fc727f1d0dccb1d102a7264bd6863642e3f"
+    },
+    {
+      "file": "practices/nv-02.md",
+      "id": "NV-02",
+      "sourceTier": "canonical-conversation",
+      "sha256": "fffe58eb8cf0698f17c359391ea979464939e530fb096f8685734c77a7983d69"
+    },
+    {
+      "file": "practices/nv-03.md",
+      "id": "NV-03",
+      "sourceTier": "canonical-conversation",
+      "sha256": "b39e9c0290f7c045dbc56c2216ff541e64402ebd823abb835326853dfa35836a"
+    },
+    {
+      "file": "practices/nv-04.md",
+      "id": "NV-04",
+      "sourceTier": "canonical-conversation",
+      "sha256": "7f383623799ebf89099f083af3ad31e67b9dc56e73c5b821f0a20781f46b6170"
+    },
+    {
+      "file": "practices/nv-05.md",
+      "id": "NV-05",
+      "sourceTier": "canonical-conversation",
+      "sha256": "fd68cda2ed343a38a41da0f337be1b79d7cec55ec8ec33d6234360df7bfeb815"
+    },
+    {
+      "file": "practices/nv-06.md",
+      "id": "NV-06",
+      "sourceTier": "canonical-conversation",
+      "sha256": "ca65c023fe603f3b121650287896f446b903037bae15e974c8be67591a6be501"
+    },
+    {
+      "file": "practices/nv-07.md",
+      "id": "NV-07",
+      "sourceTier": "canonical-conversation",
+      "sha256": "83c6230df8319096874869664d77c5e09baacaa2ff75e08449f73a9ea23e79b2"
+    },
+    {
+      "file": "practices/op-01.md",
+      "id": "OP-01",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "99e8359ef275c8fa321978fb65dceab4a028b3eae02d68f65e2d904fe598fe87"
+    },
+    {
+      "file": "practices/op-02.md",
+      "id": "OP-02",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "6442e67c2bff15596ef167eb5029a9ed3d3efee0486e91249140b5758521541f"
+    },
+    {
+      "file": "practices/op-03.md",
+      "id": "OP-03",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "07d13e00f27193def7baba3f36026b89a191c71411798281c5d677915d21d8a8"
+    },
+    {
+      "file": "practices/op-04.md",
+      "id": "OP-04",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "2fe61881642fde188aece4181c9705f0b165034df014ebd01b86bc5a7621f02f"
+    },
+    {
+      "file": "practices/op-05.md",
+      "id": "OP-05",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "cb8fb657a0b7e90b0e30b9b8d7cf18b054fe442b8a032a012d905ac53bcf95ea"
+    },
+    {
+      "file": "practices/op-06.md",
+      "id": "OP-06",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "3fad3d759ebe21b2c84a09aa4a6d4c0f3e62afbf64199919dad358cb549451d3"
+    },
+    {
+      "file": "practices/op-07.md",
+      "id": "OP-07",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "4ebbe15ea44035356e84fd2a6bb3293b66a3bb5ded3200efd35361819455d4fc"
+    },
+    {
+      "file": "practices/op-08.md",
+      "id": "OP-08",
+      "sourceTier": "pilot-repository-adapted",
+      "sha256": "46a12c79ba0d779cdfa7f09fd42593b77fb9ea4dbbbb9746539a68cc586ee56f"
+    },
+    {
+      "file": "practices/op-09.md",
+      "id": "OP-09",
+      "sourceTier": "canonical-conversation-completed",
+      "sha256": "d89ed0c907a6b37874d41ad3e9fc9be495a358ed48fdcb1f07b6a4219edbc43b"
+    },
+    {
+      "file": "practices/op-10.md",
+      "id": "OP-10",
+      "sourceTier": "canonical-conversation",
+      "sha256": "bdd7910c385304634e005a5cfd1818e1696a7c3eaaa7d39c8467d116b97ce268"
+    },
+    {
+      "file": "practices/pe-01.md",
+      "id": "PE-01",
+      "sourceTier": "canonical-conversation",
+      "sha256": "4b22dba2ee4175d19ab0ccfcef10fd82839bd3f3afbc1e55068af7bc31b87649"
+    },
+    {
+      "file": "practices/pe-02.md",
+      "id": "PE-02",
+      "sourceTier": "canonical-conversation",
+      "sha256": "beac9d7091a5666dac702ddda77178dfa229bf8091643e94d7b450300dbd16f4"
+    },
+    {
+      "file": "practices/pe-03.md",
+      "id": "PE-03",
+      "sourceTier": "canonical-conversation",
+      "sha256": "dec73d80923193834c391b3f8eddfac6b030fddb82f02067f882f36b322575e2"
+    },
+    {
+      "file": "practices/pe-04.md",
+      "id": "PE-04",
+      "sourceTier": "canonical-conversation",
+      "sha256": "eec8925ee16349961e573914eb592a15e07b426995c9fbe4d7716e1e8d76ab03"
+    },
+    {
+      "file": "practices/pe-05.md",
+      "id": "PE-05",
+      "sourceTier": "canonical-conversation",
+      "sha256": "51fb550f1d9665de8a1355b43c44797b7dcd00ddfb27c3adf0142aae501d463b"
+    },
+    {
+      "file": "practices/pe-06.md",
+      "id": "PE-06",
+      "sourceTier": "canonical-conversation",
+      "sha256": "6d9b6ebe18ade0f6cdb5c81e944915ff2e3e962a065cd6ff8185111fe2fa089c"
+    },
+    {
+      "file": "practices/pe-07.md",
+      "id": "PE-07",
+      "sourceTier": "canonical-conversation",
+      "sha256": "799e8671134d49941b71b47bc978f1ce9995eebb3863a147fb4dc86f0e2e9035"
+    },
+    {
+      "file": "practices/pe-08.md",
+      "id": "PE-08",
+      "sourceTier": "canonical-conversation",
+      "sha256": "87ee107c6b18cfe9b9acfc316d3fa96a65bdf833a9193cd8d7224ab3e150927c"
+    },
+    {
+      "file": "practices/pe-09.md",
+      "id": "PE-09",
+      "sourceTier": "canonical-conversation",
+      "sha256": "b66b07ed1e72274cfcfa3067db2b85020fda7927577eed124322f521110fab49"
+    },
+    {
+      "file": "practices/st-01.md",
+      "id": "ST-01",
+      "sourceTier": "canonical-conversation",
+      "sha256": "f439b3509f3e96721bffb8db2cf5c5d76559dd520d4084bb8a7a8cc30c21a0c1"
+    },
+    {
+      "file": "practices/st-02.md",
+      "id": "ST-02",
+      "sourceTier": "canonical-conversation",
+      "sha256": "7090950d44a1e2f2d827f52a975617820ca0f0d71ce40adc71df5087049de02f"
+    },
+    {
+      "file": "practices/st-03.md",
+      "id": "ST-03",
+      "sourceTier": "canonical-conversation",
+      "sha256": "b1431e83fb23318ba76f9ac1deba55cf6a1606f76d884c1141508c11ee2a3813"
+    },
+    {
+      "file": "practices/st-04.md",
+      "id": "ST-04",
+      "sourceTier": "canonical-conversation",
+      "sha256": "1b66f091d84da65ff7562e790b5df8bc23b1beb374b8a6a56c216c151c76f513"
+    },
+    {
+      "file": "practices/st-05.md",
+      "id": "ST-05",
+      "sourceTier": "canonical-conversation",
+      "sha256": "67156bd673ef6f0d0e0466f84a99dcfbccf2e0d0ecd4e746124cc275ddced868"
+    },
+    {
+      "file": "practices/st-06.md",
+      "id": "ST-06",
+      "sourceTier": "canonical-conversation",
+      "sha256": "b95a93cbac8e8097a1e5b6ab0dd02727446ba54b8d751d9cdfab785d6fed4aee"
+    },
+    {
+      "file": "practices/un-01.md",
+      "id": "UN-01",
+      "sourceTier": "canonical-conversation",
+      "sha256": "77a3ef10600a99ea7914df3fdf94ccc8fbc423a9b537ea05cbc554a7084f7b58"
+    },
+    {
+      "file": "practices/un-02.md",
+      "id": "UN-02",
+      "sourceTier": "canonical-conversation",
+      "sha256": "3c0c623b76ba2e684be721dcc72e0e4588605ec6d8fb180610ac40bcc184604f"
+    },
+    {
+      "file": "practices/un-03.md",
+      "id": "UN-03",
+      "sourceTier": "canonical-conversation",
+      "sha256": "951bfefc640b46e6b844afe250244e5085e47219bf654c4a91a33166877d89eb"
+    },
+    {
+      "file": "practices/un-04.md",
+      "id": "UN-04",
+      "sourceTier": "canonical-conversation",
+      "sha256": "c0214a68aab4a7abb8cecbfcb0ad23c1930297895f7f43b1a364fbb2d3a5df5f"
+    },
+    {
+      "file": "practices/un-05.md",
+      "id": "UN-05",
+      "sourceTier": "canonical-conversation",
+      "sha256": "176654a063a91abac7ac94fed177def6ff3e1345ef2f266372ad3fc632f40024"
+    },
+    {
+      "file": "practices/un-06.md",
+      "id": "UN-06",
+      "sourceTier": "canonical-conversation",
+      "sha256": "cc1dfd41d1d12c0d0cd321ed881ee3ebb503c023a91028a53f1fcda3c3fcc4aa"
+    }
+  ]
+}

@@ -1,6 +1,4 @@
-import type { PhaseStrength, PracticeFields } from '../schemas/content';
-
-export type Phase = keyof PracticeFields['phases'];
+import type { Condition, Handoff, Phase, PhaseWeight, Requirement } from './practice-master';
 
 export const phaseLabels: Record<Phase, string> = {
 	decide: 'Decide',
@@ -8,17 +6,25 @@ export const phaseLabels: Record<Phase, string> = {
 	review: 'Review',
 };
 
-export const phaseStrengthLabels: Record<PhaseStrength, string> = {
-	primary: '主に扱う',
-	supporting: '補助的に扱う',
+export const phaseWeightLabels: Record<Exclude<PhaseWeight, null>, string> = {
+	primary: '主に判断する',
+	supporting: 'あわせて確認する',
 };
 
-export const priorityLabels: Record<PracticeFields['priority'], string> = {
+export const priorityLabels = {
 	standard: '標準',
-	recommended: '推奨',
+} as const;
+
+export const requirementLabels: Record<Requirement, string> = {
+	baseline: '標準品質',
+	'project-dependent': '案件に応じて判断',
 };
 
-export const conditionLabels: Record<PracticeFields['condition'], string> = {
+export const conditionLabels: Record<Condition, string> = {
 	always: '常に確認する',
 	conditional: '該当する機能・コンテンツがある場合',
+};
+
+export const handoffLabels: Record<Handoff, string> = {
+	development: '開発へ引き継ぐ',
 };
