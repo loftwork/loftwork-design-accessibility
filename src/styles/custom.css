@@ -110,6 +110,25 @@ body {
 	font-weight: 700;
 }
 
+.guide-figure {
+	max-width: 32rem;
+	margin: 2rem auto;
+}
+
+.guide-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.75rem;
+}
+
+.guide-figure figcaption {
+	margin-block-start: 0.75rem;
+	color: var(--sl-color-gray-2);
+	font-size: var(--sl-text-sm);
+}
+
 .guide-steps,
 .guide-flow {
 	display: grid;
