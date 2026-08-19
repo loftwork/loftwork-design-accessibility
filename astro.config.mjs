@@ -39,13 +39,16 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'はじめに',
-					items: [{ slug: 'introduction', label: 'このガイドについて' }],
+					items: [
+						{ slug: 'why', label: 'なぜ、人の違いから考えるのか' },
+						{ slug: 'introduction', label: 'このガイドについて' },
+					],
 				},
-			{
-				label: 'Human Lens',
-				items: practiceMaster.lenses
-					.toSorted((a, b) => a.order - b.order)
-					.map((lens) => ({ slug: `lens/${lens.id}`, label: lens.title })),
+				{
+					label: 'Human Lens',
+					items: practiceMaster.lenses
+						.toSorted((a, b) => a.order - b.order)
+						.map((lens) => ({ slug: `lens/${lens.id}`, label: lens.title })),
 				},
 				{
 					label: 'By Phase',

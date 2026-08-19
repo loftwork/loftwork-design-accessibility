@@ -71,6 +71,119 @@ body {
 	color: var(--sl-color-accent-high);
 }
 
+.persona-spectrum {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+	margin-block: 1.5rem;
+}
+
+.persona-spectrum__group {
+	padding: 1rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.75rem;
+	background: var(--sl-color-gray-6);
+}
+
+.persona-spectrum__group h3 {
+	margin-block: 0 0.75rem;
+}
+
+.persona-spectrum__group ul {
+	display: grid;
+	gap: 0.75rem;
+	padding: 0;
+	list-style: none;
+}
+
+.persona-spectrum__group li {
+	padding: 0.75rem;
+	border-inline-start: 0.25rem solid var(--sl-color-accent);
+	background: var(--sl-color-bg);
+}
+
+.persona-spectrum__label {
+	display: block;
+	margin-block-end: 0.2rem;
+	color: var(--sl-color-gray-2);
+	font-size: var(--sl-text-xs);
+	font-weight: 700;
+}
+
+.guide-steps,
+.guide-flow {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+	padding: 0;
+	margin-block: 1.5rem 2rem;
+	list-style: none;
+}
+
+.guide-steps > li,
+.guide-flow > li {
+	position: relative;
+	padding: 1rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.75rem;
+}
+
+.guide-steps > li:not(:last-child)::after,
+.guide-flow > li:not(:last-child)::after {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	right: -0.85rem;
+	display: grid;
+	width: 1.7rem;
+	height: 1.7rem;
+	place-items: center;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 50%;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-gray-2);
+	content: '→';
+	font-weight: 700;
+	transform: translateY(-50%);
+}
+
+.guide-steps h3 {
+	margin-block: 0 0.75rem;
+	font-size: var(--sl-text-lg);
+}
+
+.guide-steps p {
+	margin-block: 0.75rem 0;
+}
+
+.guide-flow > li {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	text-align: center;
+}
+
+.guide-flow span {
+	color: var(--sl-color-gray-2);
+	font-size: var(--sl-text-sm);
+}
+
+@media (max-width: 50rem) {
+	.persona-spectrum,
+	.guide-steps,
+	.guide-flow {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.guide-steps > li:not(:last-child)::after,
+	.guide-flow > li:not(:last-child)::after {
+		top: auto;
+		right: 50%;
+		bottom: -0.85rem;
+		transform: translateX(50%) rotate(90deg);
+	}
+}
+
 @media (max-width: 30rem) {
 	.guide-intro-actions {
 		flex-direction: column;
