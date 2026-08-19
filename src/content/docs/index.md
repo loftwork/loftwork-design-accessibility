@@ -45,6 +45,11 @@ Webを作るとき、私たちはこうしたことができる自分自身を�
   </section>
 </div>
 
+<figure class="guide-figure">
+  <img src="./images/temporary-upper-limb-door.png" alt="赤ちゃんと荷物を両腕に抱え、目の前のドアノブを開けられず困っている人のイラスト" width="1197" height="1315" loading="lazy" decoding="async">
+  <figcaption>一時的に上肢が使えない典型例。赤ちゃんの安全を確保したままドアノブを開けることができない。</figcaption>
+</figure>
+
 これらは同じ状態ではありません。
 
 けれど、人とデザインの組み合わせによって、似た使いにくさが生まれることがあります。
